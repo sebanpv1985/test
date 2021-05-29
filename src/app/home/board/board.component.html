@@ -1,0 +1,49 @@
+<div class="card-body p-0 m-0">
+  <div class="header d-flex pt-2 px-2 justify-content-between">
+    <div class="header-left flex-grow-1">
+      <h3 class="header-title">#{{ orderId }}</h3>
+    </div>
+    
+    <div class="header-right flex-shrink-1">
+      <a href="#"><fa-icon [icon]="faPaperclip"></fa-icon>Repair Order</a><br />
+      <a href="#"><fa-icon [icon]="faPaperclip"></fa-icon>Invoice</a>
+    </div>
+  </div>
+  <div class="header d-flex px-2">
+    <p class="header-custname p-0 m-0"><fa-icon [icon]="faCar"></fa-icon> {{ make }}</p>
+  </div>
+  <div class="header d-flex justify-content-between px-2">
+    <div class="header-left flex-grow-1">
+    <p class="header-custname py-1 m-0 flex-grow-1"><fa-icon [icon]="faUser"></fa-icon> {{ customerName }}</p>
+    </div>
+    <div class="header-right flex-shrink-1">
+    <a href="#" class="whatsapp flex-shrink-1"><img src="../../../assets/whatsapp.png" alt="Whatsapp">Whatsapp</a>
+    </div>
+  </div>
+  <hr class="my-1" />
+  <div class="invoice p-2 d-flex gap-2 justify-content-between">
+    <div class="invoice-id">
+      <div class="invoice-label">INVOICE</div>
+      <div class="invoice-value">{{ invoiceId }}</div>
+    </div>
+    <div class="invoice-by">
+      <div class="invoice-label">Created By</div>
+      <div class="invoice-value">{{ createdBy }}</div>
+    </div>
+    <div class="invoice-date">
+      <div class="invoice-label">Completion Date</div>
+      <div class="invoice-value">{{ completionDate }}</div>
+    </div>
+  </div>
+  <hr class="my-1" />
+  <div class="footer p-2 d-flex justify-content-between">
+    <div class="footer-total">
+        <div class="footer-label">Total</div>
+        <div class="footer-value">AED {{ totalAmount }}</div>
+      </div>
+      <div class="footer-due text-end">
+        <div class="footer-label">Payment Due</div>
+        <div class="footer-value total">AED {{ amountDue }}</div>
+      </div>
+  </div>
+</div>
