@@ -1,0 +1,58 @@
+{
+  "orders": [
+    {
+      "header": "Open",
+      "List1": [
+        {
+          "orderId": 837,
+          "make": "Auris 345 Auris 345Auris 345",
+          "customerName": "Ahmed",
+          "invoiceId": "KLK-234234-IN",
+          "createdBy": "Vidyut",
+          "completionDate": "28 FEB 2021 02:10PM",
+          "totalAmount": 799,
+          "amountDue": 299,
+          "service": "washing",
+          "servicedBy": "Rashid"
+        },
+        {
+          "orderId": 838,
+          "make": "Audi A6",
+          "customerName": "Danish",
+          "invoiceId": "KRM-987348-IN",
+          "createdBy": "Advait",
+          "completionDate": "12 JAN 2021 05:00PM",
+          "totalAmount": 999,
+          "amountDue": 499,
+          "service": "washing",
+          "servicedBy": "Rashid"
+        }
+      ]
+    },
+    {
+      "header": "WIP",
+      "List2": [
+        {
+          "orderId": 836,
+          "make": "Ferrari Testarossa",
+          "customerName": "Danish",
+          "invoiceId": "KRM-857567-IN",
+          "createdBy": "Kale",
+          "completionDate": "01 JAN 2021 10:00AM",
+          "totalAmount": 699,
+          "amountDue": 149,
+          "service": "detailing",
+          "servicedBy": "Anvar"
+        }
+      ]
+    },
+    {
+      "header": "Ready",
+      "List3": []
+    },
+    {
+      "header": "Payment Due",
+      "List4": []
+    }
+  ]
+}

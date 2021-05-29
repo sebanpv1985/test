@@ -2,19 +2,21 @@
   <header class="dashboard-header mt-5">
     <h1 class="dashboard-header-title">
       Total Due:
-      <span class="dashboard-header-title--total"
+      <span class="dashboard-header-title--total" *ngIf="totalDue"
         >{{ currency }} {{ totalDue }}</span
       >
     </h1>
   </header>
   <section
-    class="d-flex flex-row my-5 gap-5 align-items-center dashboard-filter"
+    class="d-flex flex-row my-4 gap-5 align-items-center dashboard-filter"
   >
     <div class="dashboard-filter-sort">
-      <fa-icon class="icon primary" [icon]="faSort"></fa-icon>Sort <fa-icon class="icon secondary" [icon]="faAngleDown"></fa-icon>
+      <fa-icon class="icon primary" [icon]="faSort"></fa-icon>Sort
+      <fa-icon class="icon secondary" [icon]="faAngleDown"></fa-icon>
     </div>
     <div class="dashboard-filter-items">
-      <fa-icon class="icon primary" [icon]="faFilter"></fa-icon>Filter <fa-icon class="icon secondary" [icon]="faAngleDown"></fa-icon>
+      <fa-icon class="icon primary" [icon]="faFilter"></fa-icon>Filter
+      <fa-icon class="icon secondary" [icon]="faAngleDown"></fa-icon>
     </div>
     <div class="flex-fill dashboard-filter-search">
       <label for="searchOrders" class="visually-hidden">Search</label
@@ -23,61 +25,29 @@
         id="searchOrders"
         placeholder="Customer Name/ Phone No. / Reg Address"
         class="filter-search-input border-0 p-2 rounded"
+        [formControl]="search"
+        (blur)="searchOrders($event)"
       />
     </div>
   </section>
-  <section class="d-md-flex justify-content-between gap-2">
+  <section class="d-md-flex justify-content-between gap-1">
+    <div
+      *ngFor="let list of orders; let i = index"
+      class="card-wrapper"
+    >
+      <h2 class="card-wrapper-title">{{ list.status }}</h2>
       <div
         cdkDropList
-        #openList="cdkDropList"
-        [cdkDropListData]="openItems"
-        [cdkDropListConnectedTo]="[wipList]"
-        class="card-container px-3 pt-3 my-3"
-        (cdkDropListDropped)="drop($event)"
+        id="List{{ i }}"
+        [cdkDropListData]="list.data"
+        [cdkDropListConnectedTo]="[list.target]"
+        class="card-container px-3 pt-3"
+        (cdkDropListDropped)="updateOrderStatus($event)"
       >
-        <div class="card mb-3" *ngFor="let item of openItems" cdkDrag>
-          <app-board [order]="item" ></app-board>
+        <div class="card mb-3" *ngFor="let item of list.data" cdkDrag>
+          <app-board [order]="item"></app-board>
         </div>
       </div>
-
-      <div
-        cdkDropList
-        #wipList="cdkDropList"
-        [cdkDropListData]="wipItems"
-        [cdkDropListConnectedTo]="[readyList]"
-        class="card-container px-3 pt-3 my-3"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div class="card mb-3" *ngFor="let item of wipItems" cdkDrag>
-          <app-board [order]="item" ></app-board>
-        </div>
-      </div>
-
-      <div
-        cdkDropList
-        #readyList="cdkDropList"
-        [cdkDropListData]="readyItems"
-        [cdkDropListConnectedTo]="[dueList]"
-        class="card-container px-3 pt-3 my-3"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div class="card mb-3" *ngFor="let item of readyItems" cdkDrag>
-          <app-board [order]="item" ></app-board>
-        </div>
-      </div>
-
-      <div
-        cdkDropList
-        #dueList="cdkDropList"
-        [cdkDropListData]="dueItems"
-        [cdkDropListConnectedTo]="[]"
-        class="card-container px-3 pt-3 my-3"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div class="card mb-3" *ngFor="let item of dueItems" cdkDrag>
-          <app-board [order]="item" ></app-board>
-        </div>
-      </div>
-
+    </div>
   </section>
 </div>
