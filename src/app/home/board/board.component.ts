@@ -8,15 +8,20 @@ import { faCar, faUser, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 })
 export class BoardComponent implements OnInit {
   @Input() order: any;
+  @Input() currency: any;
+  
   faCar = faCar;
   faUser = faUser;
   faPaperclip = faPaperclip;
   dueIndicator: boolean = false;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    this.dueIndicator = this.order.amountDue === 0 || this.order.amountDue === null ? false : true;
+    //Display due Indicator if payment due
+    this.dueIndicator =
+      this.order.amountDue === 0 || this.order.amountDue === null
+        ? false
+        : true;
   }
 }

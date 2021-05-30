@@ -20,21 +20,19 @@
     </div>
     <div class="flex-fill dashboard-filter-search">
       <label for="searchOrders" class="visually-hidden">Search</label
+      ><fa-icon class="icon secondary" [icon]="faSearch"></fa-icon
       ><input
         type="text"
         id="searchOrders"
-        placeholder="Customer Name/ Phone No. / Reg Address"
-        class="filter-search-input border-0 p-2 rounded"
+        placeholder="Customer Name"
+        class="filter-search-input border-0 px-4 py-2 rounded"
         [formControl]="search"
-        (blur)="searchOrders($event)"
+        (keyup)="searchOrders($event)"
       />
     </div>
   </section>
   <section class="d-md-flex justify-content-between gap-1">
-    <div
-      *ngFor="let list of orders; let i = index"
-      class="card-wrapper"
-    >
+    <div *ngFor="let list of orders; let i = index" class="card-wrapper">
       <h2 class="card-wrapper-title">{{ list.status }}</h2>
       <div
         cdkDropList
@@ -45,7 +43,7 @@
         (cdkDropListDropped)="updateOrderStatus($event)"
       >
         <div class="card mb-3" *ngFor="let item of list.data" cdkDrag>
-          <app-board [order]="item"></app-board>
+          <app-board [order]="item" [currency]="currency"></app-board>
         </div>
       </div>
     </div>

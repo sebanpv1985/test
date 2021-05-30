@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ApiService } from '../service/api.service';
 import {
   faSort,
   faFilter,
   faAngleDown,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   CdkDragDrop,
@@ -16,7 +18,6 @@ export interface OrderList {
   target: string;
   data: OrderData[];
 }
-
 export interface OrderData {
   orderId: number;
   make: string;
@@ -35,127 +36,71 @@ export interface OrderData {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   orders: OrderList[] = [];
+
   totalDue: number = 0;
   currency: string = 'AED';
+
   faSort = faSort;
   faFilter = faFilter;
   faAngleDown = faAngleDown;
+  faSearch = faSearch;
+
   search = new FormControl('');
 
-  constructor() {
-    this.orders = [
-      {
-        status: 'Open',
-        target: 'List1',
-        data: [
-          {
-            orderId: 837,
-            make: 'Auris 345 Auris 345Auris 345',
-            customerName: 'Ahmed',
-            invoiceId: 'KLK-234234-IN',
-            createdBy: 'Vidyut',
-            completionDate: '28 FEB 2021 02:10PM',
-            totalAmount: 799,
-            amountDue: 299,
-            service: 'washing',
-            servicedBy: 'Rashid',
-          },
-          {
-            orderId: 838,
-            make: 'Audi A6',
-            customerName: 'Danish',
-            invoiceId: 'KRM-987348-IN',
-            createdBy: 'Advait',
-            completionDate: '12 JAN 2021 05:00PM',
-            totalAmount: 999,
-            amountDue: 499,
-            service: 'washing',
-            servicedBy: 'Rashid',
-          },
-        ],
-      },
-      {
-        status: 'WIP',
-        target: 'List2',
-        data: [
-          {
-            orderId: 836,
-            make: 'Ferrari Testarossa',
-            customerName: 'Danish',
-            invoiceId: 'KRM-857567-IN',
-            createdBy: 'Kale',
-            completionDate: '01 JAN 2021 10:00AM',
-            totalAmount: 699,
-            amountDue: 149,
-            service: 'detailing',
-            servicedBy: 'Anvar',
-          },
-        ],
-      },
-      {
-        status: 'Ready',
-        target: 'List3',
-        data: [
-          {
-            orderId: 835,
-            make: 'Ferrari Testarossa',
-            customerName: 'Danish',
-            invoiceId: 'KRM-857567-IN',
-            createdBy: 'Kale',
-            completionDate: '01 JAN 2021 10:00AM',
-            totalAmount: 699,
-            amountDue: 149,
-            service: 'detailing',
-            servicedBy: 'Anvar',
-          },
-        ],
-      },
-      {
-        status: 'Payment Due',
-        target: '',
-        data: [
-          {
-            orderId: 834,
-            make: 'Ferrari Testarossa',
-            customerName: 'Danish',
-            invoiceId: 'KRM-857567-IN',
-            createdBy: 'Kale',
-            completionDate: '01 JAN 2021 10:00AM',
-            totalAmount: 699,
-            amountDue: 149,
-            service: 'detailing',
-            servicedBy: 'Anvar',
-          },
-        ],
-      },
-    ];
-  }
+  apiSubscription: any;
+
+  constructor(private api: ApiService) {}
 
   ngOnInit(): void {
-    //Fetch total Due amount
-    this.orders.map((res: any, index) => {
-      if (Array.isArray(res.data)) {
-        res.data.map((data: any) => {
-          return (this.totalDue += data.amountDue);
-        });
-      }
+    this.apiCall();
+
+    //Fetch total Due amount after the completion of API subscription
+    setTimeout(() => {
+      this.orders.map((res: any) => {
+        if (Array.isArray(res.data)) {
+          res.data.map((data: any) => {
+            return (this.totalDue += data.amountDue);
+          });
+        }
+      });
+    }, 500);
+  }
+
+  ngOnDestroy() {
+    this.apiSubscription.unsubscribe();
+  }
+
+  apiCall() {
+    //Subscribe to orders api
+    this.apiSubscription = this.api.getOrders().subscribe((data: any[]) => {
+      this.orders = data;
     });
   }
+
   searchOrders(event: any) {
+    //function to search orders based on customer name
     let searchString = event.target.value;
-    /*let updatedorders = this.orders.filter((order) =>
-      {
-        if(Array.isArray(order.data)){
-          order.data.filter((data) => data.make.toLowerCase().includes(searchString))
-        }
-      }
-    );
-    console.log(this.orders);*/
+    let backupList = this.orders;
+    if (searchString === '') {
+      this.apiCall();
+    } else {
+      this.orders.map((items) => {
+        items.data.filter((order, index) => {
+          if (order.customerName.toLowerCase().includes(searchString)) {
+            items.data.length = 0;
+            items.data = [...items.data, order];
+          } else {
+            items.data.length = 0;
+          }
+        });
+      });
+    }
   }
 
   updateOrderStatus(event: CdkDragDrop<OrderData[]>) {
+    //Drag and drop cards sdk utility
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -169,7 +114,6 @@ export class HomeComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-      console.log(this.orders);
     }
   }
 }

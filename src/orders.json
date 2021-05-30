@@ -1,0 +1,87 @@
+[
+    {
+      "status": "Open",
+      "target": "List1",
+      "data": [
+        {
+          "orderId": 837,
+          "make": "Auris 345 Auris 345Auris 345",
+          "customerName": "Ahmed",
+          "invoiceId": "KLK-234234-IN",
+          "createdBy": "Vidyut",
+          "completionDate": "28 FEB 2021 02:10PM",
+          "totalAmount": 799,
+          "amountDue": 299,
+          "service": "washing",
+          "servicedBy": "Rashid"
+        },
+        {
+          "orderId": 838,
+          "make": "Audi A6",
+          "customerName": "Danish",
+          "invoiceId": "KRM-987348-IN",
+          "createdBy": "Advait",
+          "completionDate": "12 JAN 2021 05:00PM",
+          "totalAmount": 999,
+          "amountDue": 499,
+          "service": "washing",
+          "servicedBy": "Rashid"
+        }
+      ]
+    },
+    {
+      "status": "WIP",
+      "target": "List2",
+      "data": [
+        {
+          "orderId": 836,
+          "make": "Audi A6",
+          "customerName": "Danish",
+          "invoiceId": "KRM-987348-IN",
+          "createdBy": "Advait",
+          "completionDate": "12 JAN 2021 05:00PM",
+          "totalAmount": 999,
+          "amountDue": 499,
+          "service": "washing",
+          "servicedBy": "Rashid"
+        }
+      ]
+    },
+    {
+      "status": "Ready",
+      "target": "List3",
+      "data": [
+        {
+          "orderId": 835,
+          "make": "Auris 345 Auris 345Auris 345",
+          "customerName": "Ahmed",
+          "invoiceId": "KLK-234234-IN",
+          "createdBy": "Vidyut",
+          "completionDate": "28 FEB 2021 02:10PM",
+          "totalAmount": 799,
+          "amountDue": 299,
+          "service": "washing",
+          "servicedBy": "Rashid"
+        }
+      ]
+    },
+    {
+      "status": "Payment Due",
+      "target": "",
+      "data": [
+        {
+          "orderId": 834,
+          "make": "Audi A6",
+          "customerName": "Danish",
+          "invoiceId": "KRM-987348-IN",
+          "createdBy": "Advait",
+          "completionDate": "12 JAN 2021 05:00PM",
+          "totalAmount": 999,
+          "amountDue": 499,
+          "service": "washing",
+          "servicedBy": "Rashid"
+        }
+      ]
+    }
+  ]
+  

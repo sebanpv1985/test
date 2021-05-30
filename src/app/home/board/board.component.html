@@ -1,16 +1,18 @@
 <div class="card-body p-0 m-0" *ngIf="order">
   <div class="header d-flex pt-2 px-2 justify-content-between">
     <div class="header-left flex-grow-1">
-      <h3 class="header-title align-items-center" >
+      <h3 class="header-title align-items-center mb-0">
         #{{ order.orderId }}
         <span *ngIf="dueIndicator" class="header-title-due rounded p-1"
           >PAYMENT DUE</span
         >
       </h3>
+      <div class="py-2 gap-1 d-flex"><span class="header-left-service rounded" *ngIf="order.service">{{order.service}}</span> <span class="header-left-service serviceby rounded" *ngIf="order.servicedBy">{{order.servicedBy}}</span></div>
     </div>
 
     <div class="header-right flex-shrink-1" *ngIf="order.invoiceId">
-      <a href="#"><fa-icon [icon]="faPaperclip"></fa-icon> Repair Order</a><br />
+      <a href="#"><fa-icon [icon]="faPaperclip"></fa-icon> Repair Order</a
+      ><br />
       <a href="#"><fa-icon [icon]="faPaperclip"></fa-icon> Invoice</a>
     </div>
   </div>
@@ -21,7 +23,10 @@
   </div>
   <div class="header d-flex justify-content-between px-2">
     <div class="header-left flex-grow-1">
-      <p class="header-custname py-1 m-0 flex-grow-1" *ngIf="order.customerName">
+      <p
+        class="header-custname py-1 m-0 flex-grow-1"
+        *ngIf="order.customerName"
+      >
         <fa-icon [icon]="faUser"></fa-icon> {{ order.customerName }}
       </p>
     </div>
@@ -34,12 +39,16 @@
   <hr class="my-1" />
   <div class="invoice p-2 d-flex gap-2 justify-content-between">
     <div class="invoice-id">
-      <div class="invoice-label">INVOICE</div>
-      <div class="invoice-value" *ngIf="order.invoiceId">{{ order.invoiceId }}</div>
+      <div class="invoice-label">Invoice</div>
+      <div class="invoice-value" *ngIf="order.invoiceId">
+        {{ order.invoiceId }}
+      </div>
     </div>
     <div class="invoice-by">
       <div class="invoice-label">Created By</div>
-      <div class="invoice-value" *ngIf="order.createdBy">{{ order.createdBy }}</div>
+      <div class="invoice-value" *ngIf="order.createdBy">
+        {{ order.createdBy }}
+      </div>
     </div>
     <div class="invoice-date">
       <div class="invoice-label">Completion Date</div>
@@ -52,12 +61,14 @@
   <div class="footer p-2 d-flex justify-content-between">
     <div class="footer-total">
       <div class="footer-label">Total</div>
-      <div class="footer-value" *ngIf="order.totalAmount">AED {{ order.totalAmount }}</div>
+      <div class="footer-value" *ngIf="order.totalAmount">
+        {{currency}} {{ order.totalAmount }}
+      </div>
     </div>
     <div class="footer-due text-end">
       <div class="footer-label">Payment Due</div>
       <div class="footer-value total" *ngIf="order.amountDue">
-        AED {{ order.amountDue }}
+        {{currency}} {{ order.amountDue }}
       </div>
     </div>
   </div>

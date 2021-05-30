@@ -9,7 +9,15 @@
     }
   }
   &-filter {
+    font-size: 12px;
     &-search {
+      position: relative;
+      .secondary {
+        position: absolute;
+        left: 4px;
+        top: 4px;
+        font-size: 18px;
+      }
       input {
         width: 100%;
         background-color: $color-blue;
@@ -24,6 +32,7 @@
 }
 .card {
   cursor: pointer;
+  box-shadow: 0px 4px 5px 0px $grey;
   &-wrapper {
     width: 100%;
     &-title {
