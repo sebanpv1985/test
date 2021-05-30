@@ -7,7 +7,16 @@
           >PAYMENT DUE</span
         >
       </h3>
-      <div class="py-2 gap-1 d-flex"><span class="header-left-service rounded" *ngIf="order.service">{{order.service}}</span> <span class="header-left-service serviceby rounded" *ngIf="order.servicedBy">{{order.servicedBy}}</span></div>
+      <div class="py-2 gap-1">
+        <span class="header-left-service rounded" *ngIf="order.service">{{
+          order.service
+        }}</span>
+        <span
+          class="header-left-service serviceby rounded"
+          *ngIf="order.servicedBy"
+          >{{ order.servicedBy }}</span
+        >
+      </div>
     </div>
 
     <div class="header-right flex-shrink-1" *ngIf="order.invoiceId">
@@ -62,13 +71,13 @@
     <div class="footer-total">
       <div class="footer-label">Total</div>
       <div class="footer-value" *ngIf="order.totalAmount">
-        {{currency}} {{ order.totalAmount }}
+        {{ currency }} {{ order.totalAmount }}
       </div>
     </div>
     <div class="footer-due text-end">
       <div class="footer-label">Payment Due</div>
       <div class="footer-value total" *ngIf="order.amountDue">
-        {{currency}} {{ order.amountDue }}
+        {{ currency }} {{ order.amountDue }}
       </div>
     </div>
   </div>

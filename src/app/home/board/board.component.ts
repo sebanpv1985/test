@@ -9,7 +9,7 @@ import { faCar, faUser, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 export class BoardComponent implements OnInit {
   @Input() order: any;
   @Input() currency: any;
-  
+
   faCar = faCar;
   faUser = faUser;
   faPaperclip = faPaperclip;
